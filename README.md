@@ -1,54 +1,84 @@
 🏦 Previsão de Risco de Crédito (Credit Default Prediction)
-Este projeto utiliza técnicas de Machine Learning para prever a probabilidade de inadimplência de clientes em operações de crédito bancário. O objetivo principal é auxiliar na tomada de decisão, reduzindo prejuízos financeiros ao identificar perfis de alto risco antes da concessão do empréstimo.
+Este projeto aplica técnicas avançadas de Data Science e Machine Learning para solucionar um dos maiores desafios do setor bancário: a inadimplência. O objetivo é prever a probabilidade de um cliente não honrar seus pagamentos, permitindo uma concessão de crédito mais segura e rentável.
 
-📊 Principais Resultados
-Performance do Modelo: O modelo final alcançou um AUC-ROC de 0.7432, demonstrando uma sólida capacidade de distinção entre bons e maus pagadores.
+📊 Principais Resultados do Modelo
+O desempenho técnico e os marcos de negócio alcançados foram:
 
-Visão de Negócio: Foi adotado um ponto de corte (threshold) rigoroso de 12%, priorizando a segurança do banco ao identificar uma maior quantidade de potenciais inadimplentes.
+Métrica Principal (AUC-ROC): O modelo final atingiu 0.7432. Essa nota indica uma excelente capacidade de distinguir entre bons e maus pagadores.
 
-Variáveis Decisivas: A engenharia de variáveis foi fundamental, com destaque para o SOURCES_MEAN (média de scores externos), que se tornou a característica mais importante para as previsões do modelo.
+Threshold de Decisão: Adotamos um ponto de corte conservador de 12% (0.12).
 
-🧠 Ciclo de Desenvolvimento
-1. Análise Exploratória (EDA)
-Realizada a limpeza de dados brutos, tratamento de valores nulos e análise de correlação. Identificamos que variáveis de bureaux de crédito externos possuem o maior impacto no risco.
+Lógica de Negócio: Preferimos ser mais rigorosos para proteger o capital do banco, identificando o máximo possível de inadimplentes potenciais.
 
-2. Engenharia de Variáveis (Feature Engineering)
-Criamos métricas de negócio personalizadas para enriquecer o modelo:
+Feature de Maior Impacto: A variável criada SOURCES_MEAN (média dos bureaus de crédito externos) consolidou-se como a informação mais relevante para o "cérebro" do modelo.
 
-ANUITY_INCOME_RATIO: Comprometimento da renda mensal com a parcela.
+🧠 Ciclo de Desenvolvimento Tecnológico
+O projeto foi dividido em três etapas críticas, documentadas detalhadamente nos notebooks:
 
-CREDIT_INCOME_RATIO: Relação entre o crédito total solicitado e a renda total.
+1️⃣ Análise Exploratória de Dados (EDA)
+Arquivo: 01_eda.ipynb
 
-SOURCES_MEAN: Média consolidada das fontes de crédito externas.
+Limpeza de dados brutos e tratamento de nulos (remoção de colunas com >50% de ausência).
 
-GOODS_PRICE_RATIO: Proporção entre o valor do bem e o valor financiado.
+Análise de correlação e distribuição da variável alvo (TARGET).
 
-3. Modelagem e Otimização
-Algoritmo: Random Forest Classifier.
+Identificação de padrões de risco por idade, gênero e tipo de contrato.
 
-Otimização: Uso de GridSearchCV para ajuste fino de hiperparâmetros como profundidade das árvores e número de estimadores.
+2️⃣ Engenharia de Variáveis (Feature Engineering)
+Arquivo: 02_feature_engineering.ipynb
 
-Avaliação: Validação baseada em Matriz de Confusão e Curva ROC.
+Criação de Razões Financeiras:
 
-🛠️ Tecnologias Utilizadas
-Linguagem: Python 3.10.
+ANUITY_INCOME_RATIO: Percentual da renda comprometido com a parcela.
 
-Bibliotecas: Pandas, Scikit-Learn, Matplotlib, Seaborn e Joblib.
+CREDIT_INCOME_RATIO: Relação entre o crédito solicitado e a renda total.
 
-IDE: VS Code com Jupyter Notebooks.
+GOODS_PRICE_RATIO: Proporção entre o valor do bem e o crédito concedido.
 
-📂 Estrutura do Repositório
-notebooks/: Passo a passo da análise, desde a exploração até o modelo final.
+Consolidação de Scores: Criação da SOURCES_MEAN a partir das fontes externas 2 e 3.
 
-src/: Scripts Python com funções prontas para produção (limpeza e predição).
+Processamento Categórico: Aplicação de One-Hot Encoding para converter texto em dados numéricos processáveis.
 
-models/: O arquivo .pkl do modelo treinado e pronto para uso.
+3️⃣ Modelagem e Otimização
+Arquivo: 03_modeling.ipynb
 
-data/: Armazenamento dos dados brutos e processados (conforme regras do .gitignore).
+Algoritmo: Utilização do Random Forest Classifier com 200 árvores.
 
-🚀 Como Executar
+Tuning de Hiperparâmetros: (Opcional/Executado via GridSearchCV para encontrar a melhor combinação de profundidade e estimadores).
+
+Avaliação Visual: Geração da Matriz de Confusão e da Curva ROC para validar a performance.
+
+🛠️ Tecnologias e Ferramentas
+Linguagem: Python 3.10
+
+Processamento: Pandas e Numpy
+
+Machine Learning: Scikit-Learn
+
+Visualização: Matplotlib e Seaborn
+
+Persistência do Modelo: Joblib
+
+📂 Organização do Repositório
+A estrutura segue as melhores práticas de organização de projetos de IA:
+
+Plaintext
+├── data/               # Bases de dados (Raw e Processed)
+├── models/             # Modelo treinado (.pkl) pronto para uso
+├── notebooks/          # Passo a passo da análise (01, 02 e 03)
+├── src/                # Scripts Python para produção
+│   ├── preprocessing.py # Funções de limpeza automática
+│   └── modeling.py      # Funções de carga e predição
+├── requirements.txt    # Dependências do projeto
+└── README.md           # Documentação principal
+🚀 Como Executar o Projeto
+Clone o repositório:
+
+Bash
+git clone https://github.com/thallesfb1/credit-default-prediction.git
 Instale as dependências:
 
 Bash
 pip install -r requirements.txt
-Utilize as funções em src/ para processar novos arquivos de dados ou explore os notebooks na pasta notebooks/ para entender a lógica de construção.
+Para predição em novos dados:
+Utilize as funções presentes na pasta src/ para carregar o modelo em models/modelo_random_forest.pkl e processar novos arquivos CSV de clientes.
