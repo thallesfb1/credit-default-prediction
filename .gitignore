@@ -1,0 +1,6 @@
+venv/
+.venv/
+__pycache__/
+*.csv
+*.pkl
+.ipynb_checkpoints/git rm -r --cached venv
