@@ -1,84 +1,158 @@
-🏦 Previsão de Risco de Crédito (Credit Default Prediction)
-Este projeto aplica técnicas avançadas de Data Science e Machine Learning para solucionar um dos maiores desafios do setor bancário: a inadimplência. O objetivo é prever a probabilidade de um cliente não honrar seus pagamentos, permitindo uma concessão de crédito mais segura e rentável.
+# 🏦 Credit Default Prediction
 
-📊 Principais Resultados do Modelo
-O desempenho técnico e os marcos de negócio alcançados foram:
+Projeto de **Machine Learning aplicado ao setor bancário**, com foco em
+previsão de inadimplência para apoiar decisões de concessão de crédito
+mais seguras e rentáveis.
 
-Métrica Principal (AUC-ROC): O modelo final atingiu 0.7432. Essa nota indica uma excelente capacidade de distinguir entre bons e maus pagadores.
+------------------------------------------------------------------------
 
-Threshold de Decisão: Adotamos um ponto de corte conservador de 12% (0.12).
+## 🎯 Objetivo do Projeto
 
-Lógica de Negócio: Preferimos ser mais rigorosos para proteger o capital do banco, identificando o máximo possível de inadimplentes potenciais.
+Desenvolver um modelo preditivo capaz de estimar a probabilidade de um
+cliente se tornar inadimplente, utilizando dados históricos e técnicas
+avançadas de Data Science.
 
-Feature de Maior Impacto: A variável criada SOURCES_MEAN (média dos bureaus de crédito externos) consolidou-se como a informação mais relevante para o "cérebro" do modelo.
+O modelo permite:
 
-🧠 Ciclo de Desenvolvimento Tecnológico
-O projeto foi dividido em três etapas críticas, documentadas detalhadamente nos notebooks:
+-   ✔ Redução do risco de crédito\
+-   ✔ Melhor alocação de capital\
+-   ✔ Decisões orientadas por dados\
+-   ✔ Aumento da rentabilidade da carteira
 
-1️⃣ Análise Exploratória de Dados (EDA)
-Arquivo: 01_eda.ipynb
+------------------------------------------------------------------------
 
-Limpeza de dados brutos e tratamento de nulos (remoção de colunas com >50% de ausência).
+## 📊 Principais Resultados
 
-Análise de correlação e distribuição da variável alvo (TARGET).
+### 🏆 Performance do Modelo
 
-Identificação de padrões de risco por idade, gênero e tipo de contrato.
+-   **Métrica Principal (AUC-ROC):** `0.7432`\
+    \> Excelente capacidade de distinção entre bons e maus pagadores.
 
-2️⃣ Engenharia de Variáveis (Feature Engineering)
-Arquivo: 02_feature_engineering.ipynb
+-   **Threshold de decisão:** `0.12 (12%)`\
+    \> Estratégia conservadora para proteger o capital do banco.
 
-Criação de Razões Financeiras:
+------------------------------------------------------------------------
 
-ANUITY_INCOME_RATIO: Percentual da renda comprometido com a parcela.
+### 🧠 Lógica de Negócio Aplicada
 
-CREDIT_INCOME_RATIO: Relação entre o crédito solicitado e a renda total.
+Optamos por um threshold mais baixo para:
 
-GOODS_PRICE_RATIO: Proporção entre o valor do bem e o crédito concedido.
+-   Maximizar a identificação de inadimplentes
+-   Reduzir perdas financeiras
+-   Priorizar segurança da carteira
 
-Consolidação de Scores: Criação da SOURCES_MEAN a partir das fontes externas 2 e 3.
+------------------------------------------------------------------------
 
-Processamento Categórico: Aplicação de One-Hot Encoding para converter texto em dados numéricos processáveis.
+### ⭐ Feature de Maior Impacto
 
-3️⃣ Modelagem e Otimização
-Arquivo: 03_modeling.ipynb
+-   **SOURCES_MEAN**\
+    Média dos scores externos (bureaus de crédito).
 
-Algoritmo: Utilização do Random Forest Classifier com 200 árvores.
+------------------------------------------------------------------------
 
-Tuning de Hiperparâmetros: (Opcional/Executado via GridSearchCV para encontrar a melhor combinação de profundidade e estimadores).
+# 🔄 Ciclo de Desenvolvimento
 
-Avaliação Visual: Geração da Matriz de Confusão e da Curva ROC para validar a performance.
+## 1️⃣ Análise Exploratória de Dados (EDA)
 
-🛠️ Tecnologias e Ferramentas
-Linguagem: Python 3.10
+📁 `01_eda.ipynb`
 
-Processamento: Pandas e Numpy
+-   Limpeza de dados
+-   Remoção de colunas com \>50% de valores nulos
+-   Análise da variável alvo (`TARGET`)
+-   Correlação entre variáveis
+-   Análise de risco por idade, gênero e tipo de contrato
 
-Machine Learning: Scikit-Learn
+------------------------------------------------------------------------
 
-Visualização: Matplotlib e Seaborn
+## 2️⃣ Engenharia de Variáveis
 
-Persistência do Modelo: Joblib
+📁 `02_feature_engineering.ipynb`
 
-📂 Organização do Repositório
-A estrutura segue as melhores práticas de organização de projetos de IA:
+### 📈 Criação de Razões Financeiras
 
-Plaintext
-├── data/               # Bases de dados (Raw e Processed)
-├── models/             # Modelo treinado (.pkl) pronto para uso
-├── notebooks/          # Passo a passo da análise (01, 02 e 03)
-├── src/                # Scripts Python para produção
-│   ├── preprocessing.py # Funções de limpeza automática
-│   └── modeling.py      # Funções de carga e predição
-├── requirements.txt    # Dependências do projeto
-└── README.md           # Documentação principal
-🚀 Como Executar o Projeto
-Clone o repositório:
+-   `ANUITY_INCOME_RATIO`
+-   `CREDIT_INCOME_RATIO`
+-   `GOODS_PRICE_RATIO`
 
-Bash
+### 📊 Consolidação de Scores
+
+-   `SOURCES_MEAN` (média das fontes externas 2 e 3)
+
+### 🔠 Processamento Categórico
+
+-   One-Hot Encoding
+
+------------------------------------------------------------------------
+
+## 3️⃣ Modelagem e Otimização
+
+📁 `03_modeling.ipynb`
+
+-   Algoritmo: **Random Forest Classifier**
+-   200 árvores
+-   Ajuste opcional com `GridSearchCV`
+-   Avaliação com:
+    -   Matriz de Confusão
+    -   Curva ROC
+    -   AUC Score
+
+------------------------------------------------------------------------
+
+# 🛠️ Tecnologias Utilizadas
+
+  Categoria              Ferramenta
+  ---------------------- ---------------------
+  Linguagem              Python 3.10
+  Manipulação de Dados   Pandas, NumPy
+  Machine Learning       Scikit-Learn
+  Visualização           Matplotlib, Seaborn
+  Persistência           Joblib
+
+------------------------------------------------------------------------
+
+# 📂 Estrutura do Projeto
+
+    credit-default-prediction/
+    │
+    ├── data/
+    │   ├── raw/
+    │   └── processed/
+    │
+    ├── models/
+    │   └── modelo_random_forest.pkl
+    │
+    ├── notebooks/
+    │   ├── 01_eda.ipynb
+    │   ├── 02_feature_engineering.ipynb
+    │   └── 03_modeling.ipynb
+    │
+    ├── src/
+    │   ├── preprocessing.py
+    │   └── modeling.py
+    │
+    ├── requirements.txt
+    └── README.md
+
+------------------------------------------------------------------------
+
+# 🚀 Como Executar o Projeto
+
+## 1️⃣ Clone o repositório
+
+``` bash
 git clone https://github.com/thallesfb1/credit-default-prediction.git
-Instale as dependências:
+```
 
-Bash
+## 2️⃣ Instale as dependências
+
+``` bash
 pip install -r requirements.txt
-Para predição em novos dados:
-Utilize as funções presentes na pasta src/ para carregar o modelo em models/modelo_random_forest.pkl e processar novos arquivos CSV de clientes.
+```
+
+## 3️⃣ Realizar nova predição
+
+Utilize os scripts da pasta `src/` para:
+
+-   Carregar o modelo salvo em `models/modelo_random_forest.pkl`
+-   Processar novos dados CSV
+-   Gerar probabilidades de inadimplência
